@@ -1,8 +1,0 @@
-# depslib dependency file v1.0
-1481584109 source:c:\users\manuel\desktop\proiect mare\main.cpp
-	<iostream>
-	<fstream>
-	<stdio.h>
-	<windows.h>
-	<conio.h>
-
