@@ -371,3 +371,43 @@
 	<SDL_ttf.h>
 	<windows.h>
 
+1481908652 source:c:\users\manuel\desktop\sdl2\17_mouse_events.cpp
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+
+1482074094 source:c:\users\manuel\desktop\sdl2\good.cpp
+	<iostream>
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+	<SDL_ttf.h>
+	<windows.h>
+	<cstdlib>
+	"render.h"
+	"Media.h"
+	<conio.h>
+
+1482066672 c:\users\manuel\desktop\sdl2\render.h
+	<iostream>
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+	<SDL_ttf.h>
+	<windows.h>
+
+1482072115 c:\users\manuel\desktop\sdl2\media.h
+	<iostream>
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+	<SDL_ttf.h>
+	<windows.h>
+

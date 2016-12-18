@@ -37,6 +37,8 @@
 			<Add directory="mingw_dev_lib/lib" />
 		</Linker>
 		<Unit filename="Good.cpp" />
+		<Unit filename="Media.h" />
+		<Unit filename="render.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
