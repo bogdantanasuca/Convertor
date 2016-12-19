@@ -1,2 +1,10 @@
 version 0.1(alpha)
--add title
+-added title
+version 0.2(alpha)
+-added background,margins and a button that does nothing
+-added easteregg(Come find me!!!)
+version 0.3(alpha)
+-finished the main menu
+-buttons change when you hover the cursor over them
+-different texture rendering for different fonts
+
