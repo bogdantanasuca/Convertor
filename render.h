@@ -12,6 +12,7 @@ SDL_Renderer* gRenderer = NULL;
 
 //Globally used font
 TTF_Font *gFont = NULL;
+TTF_Font *gFont2 = NULL;
 
 
 class LTexture
@@ -27,7 +28,7 @@ class LTexture
 		bool loadFromFile( std::string path );
 
 		//Creates image from font string
-		bool loadFromRenderedText( std::string textureText, SDL_Color textColor );
+		bool loadFromRenderedText( std::string textureText, SDL_Color textColor ,TTF_Font *gFont);
 
 		//Deallocates texture
 		void free();
@@ -117,7 +118,7 @@ bool LTexture::loadFromFile( std::string path )
 	return mTexture != NULL;
 }
 
-bool LTexture::loadFromRenderedText( std::string textureText, SDL_Color textColor )
+bool LTexture::loadFromRenderedText( std::string textureText, SDL_Color textColor,TTF_Font *gFont )
 {
 	//Get rid of preexisting texture
 	free();

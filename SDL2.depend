@@ -377,7 +377,7 @@
 	<stdio.h>
 	<string>
 
-1482074094 source:c:\users\manuel\desktop\sdl2\good.cpp
+1482137945 source:c:\users\manuel\desktop\sdl2\good.cpp
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -391,7 +391,7 @@
 	"Media.h"
 	<conio.h>
 
-1482066672 c:\users\manuel\desktop\sdl2\render.h
+1482137611 c:\users\manuel\desktop\sdl2\render.h
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -401,7 +401,7 @@
 	<SDL_ttf.h>
 	<windows.h>
 
-1482072115 c:\users\manuel\desktop\sdl2\media.h
+1482137965 c:\users\manuel\desktop\sdl2\media.h
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
