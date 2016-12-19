@@ -13,7 +13,6 @@ SDL_Renderer* gRenderer = NULL;
 //Globally used font
 TTF_Font *gFont = NULL;
 TTF_Font *gFont2 = NULL;
-TTF_Font *gFont3 = NULL;
 
 
 class LTexture
@@ -236,4 +235,3 @@ SDL_Texture* loadTexture( std::string path )
 
     return newTexture;
 }
-

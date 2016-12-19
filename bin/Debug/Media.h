@@ -32,10 +32,8 @@ SDL_Surface* gMENU11b= NULL;
 SDL_Surface* gMENU12a = NULL;
 SDL_Surface* gMENU12b= NULL;
 SDL_Surface* gEasterEgg= NULL;
-SDL_Surface* button = NULL;
 LTexture gTextTexture;
 LTexture gTextTexture2;
-LTexture gTextTexture3;
 
 bool loadMedia()
 {
@@ -67,17 +65,13 @@ bool loadMedia()
     gMENU11b = SDL_LoadBMP( "11b.bmp" );
     gMENU12a = SDL_LoadBMP( "12a.bmp" );
     gMENU12b = SDL_LoadBMP( "12b.bmp" );
-    button = SDL_LoadBMP( "button.bmp" );
 
     gEasterEgg = SDL_LoadBMP( "trollface (1).bmp" );
     SDL_Color textColor = { 255, 255, 0 };
     gFont = TTF_OpenFont( "FreeSanse.ttf", 90 );
     gTextTexture.loadFromRenderedText( "Convertor", textColor,gFont );
     gFont2 = TTF_OpenFont( "riesling.ttf",25 );
-    gFont3 = TTF_OpenFont( "bauhaus.ttf",21 );
-    gTextTexture2.loadFromRenderedText( "VISAN STUDIO®  2016-2017", textColor,gFont2 );
-
-
+    gTextTexture2.loadFromRenderedText( "VISANI STUDIO®  2016-2017", textColor,gFont2 );
     if( gFont2 == NULL || gMENU2a == NULL||gEasterEgg== NULL)
     {
         printf( "Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError() );
