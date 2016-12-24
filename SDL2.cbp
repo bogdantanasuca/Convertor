@@ -38,7 +38,11 @@
 		</Linker>
 		<Unit filename="Good.cpp" />
 		<Unit filename="Media.h" />
+		<Unit filename="files+matrixes.h" />
+		<Unit filename="ok.h" />
 		<Unit filename="render.h" />
+		<Unit filename="siruri.h" />
+		<Unit filename="transformari.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

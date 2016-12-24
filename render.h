@@ -14,7 +14,9 @@ SDL_Renderer* gRenderer = NULL;
 TTF_Font *gFont = NULL;
 TTF_Font *gFont2 = NULL;
 TTF_Font *gFont3 = NULL;
+TTF_Font *gFont4 = NULL;
 
+class LTexture;
 
 class LTexture
 {

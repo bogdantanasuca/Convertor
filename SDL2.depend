@@ -377,8 +377,9 @@
 	<stdio.h>
 	<string>
 
-1482175804 source:c:\users\manuel\desktop\sdl2\good.cpp
+1482618763 source:c:\users\manuel\desktop\sdl2\good.cpp
 	<iostream>
+	<fstream>
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -386,12 +387,19 @@
 	<cmath>
 	<SDL_ttf.h>
 	<windows.h>
+	<stdlib.h>
 	<cstdlib>
 	"render.h"
 	"Media.h"
+	"ok.h"
+	"siruri.h"
+	"transformari.h"
 	<conio.h>
+	<unistd.h>
+	<iomanip>
+	"files+matrixes.h"
 
-1482164066 c:\users\manuel\desktop\sdl2\render.h
+1482250758 c:\users\manuel\desktop\sdl2\render.h
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -401,7 +409,7 @@
 	<SDL_ttf.h>
 	<windows.h>
 
-1482171755 c:\users\manuel\desktop\sdl2\media.h
+1482194922 c:\users\manuel\desktop\sdl2\media.h
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -410,4 +418,35 @@
 	<cmath>
 	<SDL_ttf.h>
 	<windows.h>
+
+1482315852 c:\users\manuel\desktop\sdl2\ok.h
+
+1482315461 c:\users\manuel\desktop\sdl2\files+matrixes.h
+
+1482313816 c:\users\manuel\desktop\sdl2\siruri.h
+
+1482619465 c:\users\manuel\desktop\sdl2\transformari.h
+	<cstring>
+	<iomanip>
+	<math.h>
+	<stdio.h>
+
+1482315026 source:c:\users\manuel\desktop\sdl2\files+matrixes.cpp
+	"headers.h"
+
+1482315026 c:\users\manuel\desktop\sdl2\headers.h
+	<iostream>
+	<fstream>
+	<SDL.h>
+	<SDL_image.h>
+	<stdio.h>
+	<string>
+	<cmath>
+	<SDL_ttf.h>
+	<windows.h>
+	<stdlib.h>
+	<cstdlib>
+	<conio.h>
+	<unistd.h>
+	<iomanip>
 

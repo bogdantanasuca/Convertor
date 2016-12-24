@@ -33,9 +33,14 @@ SDL_Surface* gMENU12a = NULL;
 SDL_Surface* gMENU12b= NULL;
 SDL_Surface* gEasterEgg= NULL;
 SDL_Surface* button = NULL;
+SDL_Surface* mini_button = NULL;
 LTexture gTextTexture;
 LTexture gTextTexture2;
 LTexture gTextTexture3;
+LTexture gTextTexture4;
+
+
+LTexture gInputTextTexture;
 
 bool loadMedia()
 {
@@ -68,6 +73,7 @@ bool loadMedia()
     gMENU12a = SDL_LoadBMP( "12a.bmp" );
     gMENU12b = SDL_LoadBMP( "12b.bmp" );
     button = SDL_LoadBMP( "button.bmp" );
+    mini_button = SDL_LoadBMP( "mini_button.bmp" );
 
     gEasterEgg = SDL_LoadBMP( "trollface (1).bmp" );
     SDL_Color textColor = { 255, 255, 0 };
@@ -75,7 +81,9 @@ bool loadMedia()
     gTextTexture.loadFromRenderedText( "Convertor", textColor,gFont );
     gFont2 = TTF_OpenFont( "riesling.ttf",25 );
     gFont3 = TTF_OpenFont( "bauhaus.ttf",21 );
+    gFont4 = TTF_OpenFont( "bauhaus.ttf",15 );
     gTextTexture2.loadFromRenderedText( "VISAN STUDIO®  2016-2017", textColor,gFont2 );
+
 
 
     if( gFont2 == NULL || gMENU2a == NULL||gEasterEgg== NULL)

@@ -5,6 +5,14 @@ version 0.2(alpha)
 -added easteregg(Come find me!!!)
 version 0.3(alpha)
 -finished the main menu
--buttons change when you hover the cursor over them
+-buttons change the font color when you hover the cursor over them
 -different texture rendering for different fonts
+version 0.4(beta)
+-beta,yuhuu
+-added submenu
+-added all kinds of dynamic buttons with nice rendering(butonas is the best)
+-"lungime" submenu is done,10 more to go
+-added input function
+
+
 
