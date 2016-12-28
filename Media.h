@@ -34,11 +34,11 @@ SDL_Surface* gMENU12b= NULL;
 SDL_Surface* gEasterEgg= NULL;
 SDL_Surface* button = NULL;
 SDL_Surface* mini_button = NULL;
+SDL_Surface* background_color = NULL;
 LTexture gTextTexture;
 LTexture gTextTexture2;
 LTexture gTextTexture3;
 LTexture gTextTexture4;
-
 
 LTexture gInputTextTexture;
 
@@ -73,6 +73,7 @@ bool loadMedia()
     gMENU12a = SDL_LoadBMP( "12a.bmp" );
     gMENU12b = SDL_LoadBMP( "12b.bmp" );
     button = SDL_LoadBMP( "button.bmp" );
+    background_color = SDL_LoadBMP( "background.bmp" );
     mini_button = SDL_LoadBMP( "mini_button.bmp" );
 
     gEasterEgg = SDL_LoadBMP( "trollface (1).bmp" );

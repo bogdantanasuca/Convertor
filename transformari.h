@@ -27,16 +27,16 @@ long double trans_char_float(char x[])
         k /= 10;
         ++q;
     }
-
+//std::cout<<a<<std::endl;
    return a;
 
 }
 
 char trans_lungime(char x[256],char y[256],int i,int j)
 {
-    long double f;
-
-    f=trans_char_float(x);
+         //std::cout<<"i="<<i<<' '<<"j="<<j<<std::endl;
+     long double f=trans_char_float(x);
+     //std::cout<<f<<std::endl;
     switch (i ){
   case 0 :
     f=0.01*f;
@@ -66,7 +66,7 @@ char trans_lungime(char x[256],char y[256],int i,int j)
     f=0.9144002494*f;
     break;
     }
-
+//std::cout<<f<<std::endl;
     switch (j ) {
   case 0 :
     f=100*f;
@@ -97,7 +97,8 @@ char trans_lungime(char x[256],char y[256],int i,int j)
     break;
     }
     sprintf(y , "%lf" , f);
-    std::cout<<y<<std::endl;
+    //std::cout<<y<<std::endl;
+    //Sleep(5000);
 
 }
 

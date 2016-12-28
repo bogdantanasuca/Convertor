@@ -64,8 +64,10 @@ void maxi_butonas_dynamic(char scris[256],int a,int b,int c,int d);
 int is_butonas_clicked(int b,int c,int d,int e,SDL_Event a);
 int is_mini_butonas_clicked(int b,int c,int d,int e,SDL_Event a);
 int is_maxi_butonas_clicked(int a,int b,int a1,int b1,int c,int d,SDL_Event e);
-
+void butonas_dynamic_afisare(char scris[256],int a,int b);
+int is_dynamic_butonas_clicked(char scris [256],int a,int b,int c,int d,SDL_Event e);
 void input(SDL_Event e,int x,int y);
+void color_background(char scris[30],int b,int c);
 
 
 int g1,g2;
@@ -131,13 +133,22 @@ void submeniu1(int x,int y,SDL_Event e)
 
         }
     }
-    if(is_maxi_butonas_clicked(50,335,60,20,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+
+
+
+    if(strcmp(textinput,"")==0&&is_maxi_butonas_clicked(50,335,60,20,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+        {input(e,50,335);
+        trans_lungime(textinput,textoutput,g1,g2);}
+    else
+    if(is_dynamic_butonas_clicked(textinput,50,335,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
     {
         input(e,50,335);
         trans_lungime(textinput,textoutput,g1,g2);
     }
     if(strcmp("",textoutput)!=0&&strcmp("",textinput))
-        maxi_butonas_dynamic(textoutput,50,500,x,y);
+        {textoutput[16]='\0';
+            butonas_dynamic_afisare(textoutput,50,500);}
+
 }
 void submeniu2(int x,int y,SDL_Event e)
 {
@@ -441,6 +452,14 @@ int is_maxi_butonas_clicked(int a,int b,int a1,int b1,int c,int d,SDL_Event e)
         return 1;
     return 0;
 }
+int is_dynamic_butonas_clicked(char scris[256],int a,int b,int c,int d,SDL_Event e)
+{
+    SDL_Color textColor_red = { 255, 0, 0 };
+        gTextTexture4.loadFromRenderedText( scris, textColor_red,gFont4 );
+     if((c>= a)&&(d>=b)&&(c<=a+gTextTexture4.getWidth()+20)&&(d<=b+gTextTexture4.getHeight()+20)&&e.type==SDL_MOUSEBUTTONDOWN)
+        return 1;
+    return 0;
+}
 void butonas(char scris[30],int b,int c,int d,int e)
 {
     int a=0;
@@ -459,6 +478,17 @@ void butonas(char scris[30],int b,int c,int d,int e)
     else
         gTextTexture3.loadFromRenderedText( scris, textColor_red,gFont3 );
     gTextTexture3.render( (90- gTextTexture3.getWidth() ) / 2+b, (30- gTextTexture3.getHeight() ) / 2 +c);
+
+}
+void color_background(char scris[30],int b,int c)
+{
+    SDL_Texture * surface_gig = SDL_CreateTextureFromSurface(gRenderer, background_color);
+    SDL_Rect dstrect_buttonas = { 0, 0, 290, 50 };
+    dstrect_buttonas.x=b;
+    dstrect_buttonas.y=c;
+
+    SDL_RenderCopy(gRenderer, surface_gig, NULL, &dstrect_buttonas);
+
 
 }
 void mini_butonas(char scris[30],int b,int c,int d,int e)
@@ -509,6 +539,13 @@ void maxi_butonas_dynamic(char scris[256],int a,int b,int c,int d)
     int bines=0;
     SDL_Color textColor_blue = { 0, 0, 255 };
     SDL_Color textColor_red = { 255, 0, 0 };
+        gTextTexture4.loadFromRenderedText( scris, textColor_red,gFont4 );
+     if((c>= a)&&(d>=b)&&(c<=a+gTextTexture4.getWidth()+20)&&(d<=b+gTextTexture4.getHeight()+20))
+        bines=1;
+    if(bines==0)
+        gTextTexture4.loadFromRenderedText( scris, textColor_blue,gFont4 );
+    else
+        gTextTexture4.loadFromRenderedText( scris, textColor_red,gFont4 );
     SDL_Texture * surface_gig = SDL_CreateTextureFromSurface(gRenderer, mini_button);
     SDL_Rect dstrect_buttonas = { 0, 0, 0, 0 };
     dstrect_buttonas.x=a;
@@ -517,16 +554,27 @@ void maxi_butonas_dynamic(char scris[256],int a,int b,int c,int d)
     dstrect_buttonas.h=gTextTexture4.getHeight()+20;
 
     SDL_RenderCopy(gRenderer, surface_gig, NULL, &dstrect_buttonas);
-    if((c>= a)&&(d>=b)&&(c<=a+gTextTexture4.getWidth()+20)&&(d<=b+gTextTexture4.getHeight()+20))
-        bines=1;
-    if(bines==0)
-        gTextTexture4.loadFromRenderedText( scris, textColor_blue,gFont4 );
-    else
-        gTextTexture4.loadFromRenderedText( scris, textColor_red,gFont4 );
+
     //gTextTexture4.render( (a1- gTextTexture4.getWidth() ) / 2+a, (b1- gTextTexture4.getHeight() ) / 2 +b);
     gTextTexture4.render( a+10,b+10);
 }
+void butonas_dynamic_afisare(char scris[256],int a,int b)
+{
+    int bines=0;
+    SDL_Color textColor_blue = { 0, 0, 255 };
+    SDL_Color textColor_red = { 255, 0, 0 };
+     gTextTexture4.loadFromRenderedText( scris, textColor_blue,gFont4 );
+    SDL_Texture * surface_gig2 = SDL_CreateTextureFromSurface(gRenderer, button);
+    SDL_Rect dstrect_buttonas = { 0, 0, 0, 0 };
+    dstrect_buttonas.x=a;
+    dstrect_buttonas.y=b;
+    dstrect_buttonas.w=gTextTexture4.getWidth()+20;
+    dstrect_buttonas.h=gTextTexture4.getHeight()+20;
 
+    SDL_RenderCopy(gRenderer, surface_gig2, NULL, &dstrect_buttonas);
+
+    gTextTexture4.render( a+10,b+10);
+}
 void meniu(int x,int y,SDL_Event e)
 {
     background();
@@ -814,6 +862,7 @@ void input(SDL_Event e,int x,int y)
     SDL_StartTextInput();
     while( ok )
     {
+
         //The rerender text flag
         bool renderText = false;
 
@@ -834,6 +883,7 @@ void input(SDL_Event e,int x,int y)
                     //lop off character
                     inputText.pop_back();
                     renderText = true;
+
                 }
                 //Handle copy
                 else if( e.key.keysym.sym == SDLK_c && SDL_GetModState() & KMOD_CTRL )
@@ -848,7 +898,7 @@ void input(SDL_Event e,int x,int y)
                 }
             }
             //Special text input event
-            else if( e.type == SDL_TEXTINPUT )
+            else if( e.type == SDL_TEXTINPUT&&inputText.length()<16 )
             {
                 //Not copy or pasting
                 if( !( ( e.text.text[ 0 ] == 'c' || e.text.text[ 0 ] == 'C' ) && ( e.text.text[ 0 ] == 'v' || e.text.text[ 0 ] == 'V' ) && SDL_GetModState() & KMOD_CTRL ) )
@@ -858,6 +908,7 @@ void input(SDL_Event e,int x,int y)
                     renderText = true;
                 }
             }
+
         }
 
         //Rerender text if needed
@@ -878,17 +929,20 @@ void input(SDL_Event e,int x,int y)
         }
 
 
-        background();
+        strcpy(textinput,inputText.c_str());
+
         SDL_RenderPresent( gRenderer );
+
+        color_background("",x,y);
+
         maxi_butonas_dynamic(textinput,x,y,x,y);
-        SDL_RenderPresent( gRenderer );
         background();
+        SDL_RenderPresent( gRenderer );
         //Update screen
 
-        SDL_RenderPresent( gRenderer );
 
-        strcpy(textinput,inputText.c_str());
-        cout<<textinput<<endl;
+
+
         if( e.key.keysym.sym == SDLK_ESCAPE||e.key.keysym.sym ==SDLK_RETURN )
             break;
     }

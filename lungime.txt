@@ -3,7 +3,7 @@ ft
 in
 km
 m
-mm
 mi
+mm
 nmi
 Yd

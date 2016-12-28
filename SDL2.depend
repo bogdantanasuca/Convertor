@@ -377,7 +377,7 @@
 	<stdio.h>
 	<string>
 
-1482618763 source:c:\users\manuel\desktop\sdl2\good.cpp
+1482904489 source:c:\users\manuel\desktop\sdl2\good.cpp
 	<iostream>
 	<fstream>
 	<SDL.h>
@@ -399,7 +399,7 @@
 	<iomanip>
 	"files+matrixes.h"
 
-1482250758 c:\users\manuel\desktop\sdl2\render.h
+1482900682 c:\users\manuel\desktop\sdl2\render.h
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -409,7 +409,7 @@
 	<SDL_ttf.h>
 	<windows.h>
 
-1482194922 c:\users\manuel\desktop\sdl2\media.h
+1482903827 c:\users\manuel\desktop\sdl2\media.h
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -425,7 +425,7 @@
 
 1482313816 c:\users\manuel\desktop\sdl2\siruri.h
 
-1482619465 c:\users\manuel\desktop\sdl2\transformari.h
+1482898059 c:\users\manuel\desktop\sdl2\transformari.h
 	<cstring>
 	<iomanip>
 	<math.h>
