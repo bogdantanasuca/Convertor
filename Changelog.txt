@@ -13,7 +13,11 @@ version 0.4(beta)
 -added all kinds of dynamic buttons with nice rendering(butonas is the best)
 -"lungime" submenu is done,10 more to go
 -added input function
-versio 0.5(beta)
+version 0.5(beta)
 -fixed some graphical issues
 -Happy Christmas(25.12.2016)
+version 0.(6)(beta)
+-still beta :(
+-added all the menus(it works!!)
+-kinda ready
 
