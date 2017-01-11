@@ -71,9 +71,10 @@ void color_background(char scris[30],int b,int c);
 
 
 int g1,g2;
+
 void submeniu1(int x,int y,SDL_Event e)
 {
-    int j,i;;
+    int j,i;
     citire_lungime(lungime);
     quit_button_back(x,y,e);
     if(submenu1_ok1_1)
@@ -86,12 +87,10 @@ void submeniu1(int x,int y,SDL_Event e)
     }
     if(!submenu1_ok1_1 && strcmp("",textinput))
         maxi_butonas_dynamic(textinput,50,335,x,y);
-
     if(!submenu1_ok1_1 && !strcmp("",textinput))
     {
         if(submenu1_ok2_1==0)
-        maxi_butonas("",50,335,60,20,x,y);
-
+            maxi_butonas("",50,335,60,20,x,y);
     }
     if(!submenu1_ok1)
     {
@@ -108,13 +107,10 @@ void submeniu1(int x,int y,SDL_Event e)
                 g1=i-1;
                 return;
             }
-
         }
     }
-
     if(submenu1_ok2_1)
         strcpy (b,"Select");
-
     butonas(b,SCREEN_WIDTH-145,200,x,y);
     if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
         submenu1_ok2=0;
@@ -130,74 +126,748 @@ void submeniu1(int x,int y,SDL_Event e)
                 strcpy (b,lungime[j-1]);
                 g2=j-1;
             }
-
         }
     }
-
-
-
     if(strcmp(textinput,"")==0&&is_maxi_butonas_clicked(50,335,60,20,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
-        {input(e,50,335);
-        trans_lungime(textinput,textoutput,g1,g2);}
-    else
-    if(is_dynamic_butonas_clicked(textinput,50,335,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_lungime(textinput,textoutput,g1,g2);
+    }
+    else if(is_dynamic_butonas_clicked(textinput,50,335,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
     {
         input(e,50,335);
         trans_lungime(textinput,textoutput,g1,g2);
     }
     if(strcmp("",textoutput)!=0&&strcmp("",textinput))
-        {textoutput[16]='\0';
-            butonas_dynamic_afisare(textoutput,50,500);}
-
+    {
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
 }
 void submeniu2(int x,int y,SDL_Event e)
 {
+    int j,i;
+    citire_arie(arie);
     quit_button_back(x,y,e);
+    if(submenu1_ok1_1)
+        strcpy (a,"Select");
+    butonas(a,55,200,x,y);
+    if(is_butonas_clicked(55,200,x,y,e))
+    {
+        SDL_RenderPresent( gRenderer );
+        submenu1_ok1=0;
+    }
+    if(!submenu1_ok1_1 && strcmp("",textinput))
+        maxi_butonas_dynamic(textinput,50,335,x,y);
+    if(!submenu1_ok1_1 && !strcmp("",textinput))
+    {
+        if(submenu1_ok2_1==0)
+            maxi_butonas("",50,335,60,20,x,y);
+    }
+    if(!submenu1_ok1)
+    {
+        int submenu1_ok1_openleftdropmenu=1;
+        for(i=1; i<=10; i++)
+        {
+            mini_butonas(arie[i-1],55,213+i*17,x,y);
+            if(is_mini_butonas_clicked(55,213+i*17,x,y,e))
+            {
+                submenu1_ok1=1;
+                submenu1_ok1_1=0;
+                strcpy (a,arie[i-1]);
+                submenu1_ok1_openleftdropmenu=0;
+                g1=i-1;
+                return;
+            }
+        }
+    }
+    if(submenu1_ok2_1)
+        strcpy (b,"Select");
+    butonas(b,SCREEN_WIDTH-145,200,x,y);
+    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+        submenu1_ok2=0;
+    if(!submenu1_ok2)
+    {
+        for(j=1; j<=10; j++)
+        {
+            mini_butonas(arie[j-1],SCREEN_WIDTH-145,213+j*17,x,y);
+            if(is_mini_butonas_clicked(SCREEN_WIDTH-145,213+j*17,x,y,e))
+            {
+                submenu1_ok2=1;
+                submenu1_ok2_1=0;
+                strcpy (b,arie[j-1]);
+                g2=j-1;
+            }
+        }
+    }
+    if(strcmp(textinput,"")==0&&is_maxi_butonas_clicked(50,335,60,20,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_arie(textinput,textoutput,g1,g2);
+    }
+    else if(is_dynamic_butonas_clicked(textinput,50,335,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_arie(textinput,textoutput,g1,g2);
+    }
+    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
+    {
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
 
 }
 void submeniu3(int x,int y,SDL_Event e)
 {
+    int j,i;
+    citire_volum(volum);
     quit_button_back(x,y,e);
+    if(submenu1_ok1_1)
+        strcpy (a,"Select");
+    butonas(a,55,200,x,y);
+    if(is_butonas_clicked(55,200,x,y,e))
+    {
+        SDL_RenderPresent( gRenderer );
+        submenu1_ok1=0;
+    }
+    if(!submenu1_ok1_1 && strcmp("",textinput))
+        maxi_butonas_dynamic(textinput,50,335,x,y);
+    if(!submenu1_ok1_1 && !strcmp("",textinput))
+    {
+        if(submenu1_ok2_1==0)
+            maxi_butonas("",50,335,60,20,x,y);
+    }
+    if(!submenu1_ok1)
+    {
+        int submenu1_ok1_openleftdropmenu=1;
+        for(i=1; i<=12; i++)
+        {
+            mini_butonas(volum[i-1],55,213+i*17,x,y);
+            if(is_mini_butonas_clicked(55,213+i*17,x,y,e))
+            {
+                submenu1_ok1=1;
+                submenu1_ok1_1=0;
+                strcpy (a,volum[i-1]);
+                submenu1_ok1_openleftdropmenu=0;
+                g1=i-1;
+                return;
+            }
+        }
+    }
+    if(submenu1_ok2_1)
+        strcpy (b,"Select");
+    butonas(b,SCREEN_WIDTH-145,200,x,y);
+    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+        submenu1_ok2=0;
+    if(!submenu1_ok2)
+    {
+        for(j=1; j<=12; j++)
+        {
+            mini_butonas(volum[j-1],SCREEN_WIDTH-145,213+j*17,x,y);
+            if(is_mini_butonas_clicked(SCREEN_WIDTH-145,213+j*17,x,y,e))
+            {
+                submenu1_ok2=1;
+                submenu1_ok2_1=0;
+                strcpy (b,volum[j-1]);
+                g2=j-1;
+            }
+        }
+    }
+    if(strcmp(textinput,"")==0&&is_maxi_butonas_clicked(50,335,60,20,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_volum(textinput,textoutput,g1,g2);
+    }
+    else if(is_dynamic_butonas_clicked(textinput,50,335,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_volum(textinput,textoutput,g1,g2);
+    }
+    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
+    {
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
+
 
 }
 void submeniu4(int x,int y,SDL_Event e)
 {
+   int j,i;
+    citire_timp(timp);
     quit_button_back(x,y,e);
-
+    if(submenu1_ok1_1)
+        strcpy (a,"Select");
+    butonas(a,55,200,x,y);
+    if(is_butonas_clicked(55,200,x,y,e))
+    {
+        SDL_RenderPresent( gRenderer );
+        submenu1_ok1=0;
+    }
+    if(!submenu1_ok1_1 && strcmp("",textinput))
+        maxi_butonas_dynamic(textinput,50,335,x,y);
+    if(!submenu1_ok1_1 && !strcmp("",textinput))
+    {
+        if(submenu1_ok2_1==0)
+            maxi_butonas("",50,335,60,20,x,y);
+    }
+    if(!submenu1_ok1)
+    {
+        int submenu1_ok1_openleftdropmenu=1;
+        for(i=1; i<=10; i++)
+        {
+            mini_butonas(timp[i-1],55,213+i*17,x,y);
+            if(is_mini_butonas_clicked(55,213+i*17,x,y,e))
+            {
+                submenu1_ok1=1;
+                submenu1_ok1_1=0;
+                strcpy (a,timp[i-1]);
+                submenu1_ok1_openleftdropmenu=0;
+                g1=i-1;
+                return;
+            }
+        }
+    }
+    if(submenu1_ok2_1)
+        strcpy (b,"Select");
+    butonas(b,SCREEN_WIDTH-145,200,x,y);
+    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+        submenu1_ok2=0;
+    if(!submenu1_ok2)
+    {
+        for(j=1; j<=10; j++)
+        {
+            mini_butonas(timp[j-1],SCREEN_WIDTH-145,213+j*17,x,y);
+            if(is_mini_butonas_clicked(SCREEN_WIDTH-145,213+j*17,x,y,e))
+            {
+                submenu1_ok2=1;
+                submenu1_ok2_1=0;
+                strcpy (b,timp[j-1]);
+                g2=j-1;
+            }
+        }
+    }
+    if(strcmp(textinput,"")==0&&is_maxi_butonas_clicked(50,335,60,20,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_timp(textinput,textoutput,g1,g2);
+    }
+    else if(is_dynamic_butonas_clicked(textinput,50,335,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_timp(textinput,textoutput,g1,g2);
+    }
+    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
+    {
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
 }
 void submeniu5(int x,int y,SDL_Event e)
 {
+       int j,i;
+    citire_viteza(viteza);
     quit_button_back(x,y,e);
-
+    if(submenu1_ok1_1)
+        strcpy (a,"Select");
+    butonas(a,55,200,x,y);
+    if(is_butonas_clicked(55,200,x,y,e))
+    {
+        SDL_RenderPresent( gRenderer );
+        submenu1_ok1=0;
+    }
+    if(!submenu1_ok1_1 && strcmp("",textinput))
+        maxi_butonas_dynamic(textinput,50,335,x,y);
+    if(!submenu1_ok1_1 && !strcmp("",textinput))
+    {
+        if(submenu1_ok2_1==0)
+            maxi_butonas("",50,335,60,20,x,y);
+    }
+    if(!submenu1_ok1)
+    {
+        int submenu1_ok1_openleftdropmenu=1;
+        for(i=1; i<=19; i++)
+        {
+            mini_butonas(viteza[i-1],55,213+i*17,x,y);
+            if(is_mini_butonas_clicked(55,213+i*17,x,y,e))
+            {
+                submenu1_ok1=1;
+                submenu1_ok1_1=0;
+                strcpy (a,viteza[i-1]);
+                submenu1_ok1_openleftdropmenu=0;
+                g1=i-1;
+                return;
+            }
+        }
+    }
+    if(submenu1_ok2_1)
+        strcpy (b,"Select");
+    butonas(b,SCREEN_WIDTH-145,200,x,y);
+    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+        submenu1_ok2=0;
+    if(!submenu1_ok2)
+    {
+        for(j=1; j<=19; j++)
+        {
+            mini_butonas(viteza[j-1],SCREEN_WIDTH-145,213+j*17,x,y);
+            if(is_mini_butonas_clicked(SCREEN_WIDTH-145,213+j*17,x,y,e))
+            {
+                submenu1_ok2=1;
+                submenu1_ok2_1=0;
+                strcpy (b,viteza[j-1]);
+                g2=j-1;
+            }
+        }
+    }
+    if(strcmp(textinput,"")==0&&is_maxi_butonas_clicked(50,335,60,20,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_viteza(textinput,textoutput,g1,g2);
+    }
+    else if(is_dynamic_butonas_clicked(textinput,50,335,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_viteza(textinput,textoutput,g1,g2);
+    }
+    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
+    {
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
 }
 void submeniu6(int x,int y,SDL_Event e)
 {
+          int j,i;
+    citire_temperatura(temperatura);
     quit_button_back(x,y,e);
-
+    if(submenu1_ok1_1)
+        strcpy (a,"Select");
+    butonas(a,55,200,x,y);
+    if(is_butonas_clicked(55,200,x,y,e))
+    {
+        SDL_RenderPresent( gRenderer );
+        submenu1_ok1=0;
+    }
+    if(!submenu1_ok1_1 && strcmp("",textinput))
+        maxi_butonas_dynamic(textinput,50,335,x,y);
+    if(!submenu1_ok1_1 && !strcmp("",textinput))
+    {
+        if(submenu1_ok2_1==0)
+            maxi_butonas("",50,335,60,20,x,y);
+    }
+    if(!submenu1_ok1)
+    {
+        int submenu1_ok1_openleftdropmenu=1;
+        for(i=1; i<=4; i++)
+        {
+            mini_butonas(temperatura[i-1],55,213+i*17,x,y);
+            if(is_mini_butonas_clicked(55,213+i*17,x,y,e))
+            {
+                submenu1_ok1=1;
+                submenu1_ok1_1=0;
+                strcpy (a,temperatura[i-1]);
+                submenu1_ok1_openleftdropmenu=0;
+                g1=i-1;
+                return;
+            }
+        }
+    }
+    if(submenu1_ok2_1)
+        strcpy (b,"Select");
+    butonas(b,SCREEN_WIDTH-145,200,x,y);
+    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+        submenu1_ok2=0;
+    if(!submenu1_ok2)
+    {
+        for(j=1; j<=4; j++)
+        {
+            mini_butonas(temperatura[j-1],SCREEN_WIDTH-145,213+j*17,x,y);
+            if(is_mini_butonas_clicked(SCREEN_WIDTH-145,213+j*17,x,y,e))
+            {
+                submenu1_ok2=1;
+                submenu1_ok2_1=0;
+                strcpy (b,temperatura[j-1]);
+                g2=j-1;
+            }
+        }
+    }
+    if(strcmp(textinput,"")==0&&is_maxi_butonas_clicked(50,335,60,20,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_temperatura(textinput,textoutput,g1,g2);
+    }
+    else if(is_dynamic_butonas_clicked(textinput,50,335,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_temperatura(textinput,textoutput,g1,g2);
+    }
+    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
+    {
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
 }
 void submeniu7(int x,int y,SDL_Event e)
 {
+             int j,i;
+    citire_masa(masa);
     quit_button_back(x,y,e);
-
+    if(submenu1_ok1_1)
+        strcpy (a,"Select");
+    butonas(a,55,200,x,y);
+    if(is_butonas_clicked(55,200,x,y,e))
+    {
+        SDL_RenderPresent( gRenderer );
+        submenu1_ok1=0;
+    }
+    if(!submenu1_ok1_1 && strcmp("",textinput))
+        maxi_butonas_dynamic(textinput,50,335,x,y);
+    if(!submenu1_ok1_1 && !strcmp("",textinput))
+    {
+        if(submenu1_ok2_1==0)
+            maxi_butonas("",50,335,60,20,x,y);
+    }
+    if(!submenu1_ok1)
+    {
+        int submenu1_ok1_openleftdropmenu=1;
+        for(i=1; i<=8; i++)
+        {
+            mini_butonas(masa[i-1],55,213+i*17,x,y);
+            if(is_mini_butonas_clicked(55,213+i*17,x,y,e))
+            {
+                submenu1_ok1=1;
+                submenu1_ok1_1=0;
+                strcpy (a,masa[i-1]);
+                submenu1_ok1_openleftdropmenu=0;
+                g1=i-1;
+                return;
+            }
+        }
+    }
+    if(submenu1_ok2_1)
+        strcpy (b,"Select");
+    butonas(b,SCREEN_WIDTH-145,200,x,y);
+    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+        submenu1_ok2=0;
+    if(!submenu1_ok2)
+    {
+        for(j=1; j<=8; j++)
+        {
+            mini_butonas(masa[j-1],SCREEN_WIDTH-145,213+j*17,x,y);
+            if(is_mini_butonas_clicked(SCREEN_WIDTH-145,213+j*17,x,y,e))
+            {
+                submenu1_ok2=1;
+                submenu1_ok2_1=0;
+                strcpy (b,masa[j-1]);
+                g2=j-1;
+            }
+        }
+    }
+    if(strcmp(textinput,"")==0&&is_maxi_butonas_clicked(50,335,60,20,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_masa(textinput,textoutput,g1,g2);
+    }
+    else if(is_dynamic_butonas_clicked(textinput,50,335,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_masa(textinput,textoutput,g1,g2);
+    }
+    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
+    {
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
 }
 void submeniu8(int x,int y,SDL_Event e)
 {
+             int j,i;
+    citire_energie(energie);
     quit_button_back(x,y,e);
-
+    if(submenu1_ok1_1)
+        strcpy (a,"Select");
+    butonas(a,55,200,x,y);
+    if(is_butonas_clicked(55,200,x,y,e))
+    {
+        SDL_RenderPresent( gRenderer );
+        submenu1_ok1=0;
+    }
+    if(!submenu1_ok1_1 && strcmp("",textinput))
+        maxi_butonas_dynamic(textinput,50,335,x,y);
+    if(!submenu1_ok1_1 && !strcmp("",textinput))
+    {
+        if(submenu1_ok2_1==0)
+            maxi_butonas("",50,335,60,20,x,y);
+    }
+    if(!submenu1_ok1)
+    {
+        int submenu1_ok1_openleftdropmenu=1;
+        for(i=1; i<=7; i++)
+        {
+            mini_butonas(energie[i-1],55,213+i*17,x,y);
+            if(is_mini_butonas_clicked(55,213+i*17,x,y,e))
+            {
+                submenu1_ok1=1;
+                submenu1_ok1_1=0;
+                strcpy (a,energie[i-1]);
+                submenu1_ok1_openleftdropmenu=0;
+                g1=i-1;
+                return;
+            }
+        }
+    }
+    if(submenu1_ok2_1)
+        strcpy (b,"Select");
+    butonas(b,SCREEN_WIDTH-145,200,x,y);
+    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+        submenu1_ok2=0;
+    if(!submenu1_ok2)
+    {
+        for(j=1; j<=8; j++)
+        {
+            mini_butonas(energie[j-1],SCREEN_WIDTH-145,213+j*17,x,y);
+            if(is_mini_butonas_clicked(SCREEN_WIDTH-145,213+j*17,x,y,e))
+            {
+                submenu1_ok2=1;
+                submenu1_ok2_1=0;
+                strcpy (b,energie[j-1]);
+                g2=j-1;
+            }
+        }
+    }
+    if(strcmp(textinput,"")==0&&is_maxi_butonas_clicked(50,335,60,20,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_energie(textinput,textoutput,g1,g2);
+    }
+    else if(is_dynamic_butonas_clicked(textinput,50,335,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_energie(textinput,textoutput,g1,g2);
+    }
+    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
+    {
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
 }
 void submeniu9(int x,int y,SDL_Event e)
 {
+                 int j,i;
+    citire_presiune(presiune);
     quit_button_back(x,y,e);
-
+    if(submenu1_ok1_1)
+        strcpy (a,"Select");
+    butonas(a,55,200,x,y);
+    if(is_butonas_clicked(55,200,x,y,e))
+    {
+        SDL_RenderPresent( gRenderer );
+        submenu1_ok1=0;
+    }
+    if(!submenu1_ok1_1 && strcmp("",textinput))
+        maxi_butonas_dynamic(textinput,50,335,x,y);
+    if(!submenu1_ok1_1 && !strcmp("",textinput))
+    {
+        if(submenu1_ok2_1==0)
+            maxi_butonas("",50,335,60,20,x,y);
+    }
+    if(!submenu1_ok1)
+    {
+        int submenu1_ok1_openleftdropmenu=1;
+        for(i=1; i<=18; i++)
+        {
+            mini_butonas(presiune[i-1],55,213+i*17,x,y);
+            if(is_mini_butonas_clicked(55,213+i*17,x,y,e))
+            {
+                submenu1_ok1=1;
+                submenu1_ok1_1=0;
+                strcpy (a,presiune[i-1]);
+                submenu1_ok1_openleftdropmenu=0;
+                g1=i-1;
+                return;
+            }
+        }
+    }
+    if(submenu1_ok2_1)
+        strcpy (b,"Select");
+    butonas(b,SCREEN_WIDTH-145,200,x,y);
+    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+        submenu1_ok2=0;
+    if(!submenu1_ok2)
+    {
+        for(j=1; j<=18; j++)
+        {
+            mini_butonas(presiune[j-1],SCREEN_WIDTH-145,213+j*17,x,y);
+            if(is_mini_butonas_clicked(SCREEN_WIDTH-145,213+j*17,x,y,e))
+            {
+                submenu1_ok2=1;
+                submenu1_ok2_1=0;
+                strcpy (b,presiune[j-1]);
+                g2=j-1;
+            }
+        }
+    }
+    if(strcmp(textinput,"")==0&&is_maxi_butonas_clicked(50,335,60,20,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_presiune(textinput,textoutput,g1,g2);
+    }
+    else if(is_dynamic_butonas_clicked(textinput,50,335,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_presiune(textinput,textoutput,g1,g2);
+    }
+    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
+    {
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
 }
 void submeniu10(int x,int y,SDL_Event e)
 {
+                     int j,i;
+    citire_densitate(densitate);
     quit_button_back(x,y,e);
+    if(submenu1_ok1_1)
+        strcpy (a,"Select");
+    butonas(a,55,200,x,y);
+    if(is_butonas_clicked(55,200,x,y,e))
+    {
+        SDL_RenderPresent( gRenderer );
+        submenu1_ok1=0;
+    }
+    if(!submenu1_ok1_1 && strcmp("",textinput))
+        maxi_butonas_dynamic(textinput,50,335,x,y);
+    if(!submenu1_ok1_1 && !strcmp("",textinput))
+    {
+        if(submenu1_ok2_1==0)
+            maxi_butonas("",50,335,60,20,x,y);
+    }
+    if(!submenu1_ok1)
+    {
+        int submenu1_ok1_openleftdropmenu=1;
+        for(i=1; i<=20; i++)
+        {
+            mini_butonas(densitate[i-1],55,213+i*17,x,y);
+            if(is_mini_butonas_clicked(55,213+i*17,x,y,e))
+            {
+                submenu1_ok1=1;
+                submenu1_ok1_1=0;
+                strcpy (a,densitate[i-1]);
+                submenu1_ok1_openleftdropmenu=0;
+                g1=i-1;
+                return;
+            }
+        }
+    }
+    if(submenu1_ok2_1)
+        strcpy (b,"Select");
+    butonas(b,SCREEN_WIDTH-145,200,x,y);
+    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+        submenu1_ok2=0;
+    if(!submenu1_ok2)
+    {
+        for(j=1; j<=20; j++)
+        {
+            mini_butonas(densitate[j-1],SCREEN_WIDTH-145,213+j*17,x,y);
+            if(is_mini_butonas_clicked(SCREEN_WIDTH-145,213+j*17,x,y,e))
+            {
+                submenu1_ok2=1;
+                submenu1_ok2_1=0;
+                strcpy (b,densitate[j-1]);
+                g2=j-1;
+            }
+        }
+    }
+    if(strcmp(textinput,"")==0&&is_maxi_butonas_clicked(50,335,60,20,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_densitate(textinput,textoutput,g1,g2);
+    }
+    else if(is_dynamic_butonas_clicked(textinput,50,335,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_densitate(textinput,textoutput,g1,g2);
+    }
+    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
+    {
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
 
 }
 void submeniu11(int x,int y,SDL_Event e)
 {
+                      int j,i;
+    citire_consum(consum);
     quit_button_back(x,y,e);
+    if(submenu1_ok1_1)
+        strcpy (a,"Select");
+    butonas(a,55,200,x,y);
+    if(is_butonas_clicked(55,200,x,y,e))
+    {
+        SDL_RenderPresent( gRenderer );
+        submenu1_ok1=0;
+    }
+    if(!submenu1_ok1_1 && strcmp("",textinput))
+        maxi_butonas_dynamic(textinput,50,335,x,y);
+    if(!submenu1_ok1_1 && !strcmp("",textinput))
+    {
+        if(submenu1_ok2_1==0)
+            maxi_butonas("",50,335,60,20,x,y);
+    }
+    if(!submenu1_ok1)
+    {
+        int submenu1_ok1_openleftdropmenu=1;
+        for(i=1; i<=6; i++)
+        {
+            mini_butonas(consum[i-1],55,213+i*17,x,y);
+            if(is_mini_butonas_clicked(55,213+i*17,x,y,e))
+            {
+                submenu1_ok1=1;
+                submenu1_ok1_1=0;
+                strcpy (a,consum[i-1]);
+                submenu1_ok1_openleftdropmenu=0;
+                g1=i-1;
+                return;
+            }
+        }
+    }
+    if(submenu1_ok2_1)
+        strcpy (b,"Select");
+    butonas(b,SCREEN_WIDTH-145,200,x,y);
+    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+        submenu1_ok2=0;
+    if(!submenu1_ok2)
+    {
+        for(j=1; j<=6; j++)
+        {
+            mini_butonas(consum[j-1],SCREEN_WIDTH-145,213+j*17,x,y);
+            if(is_mini_butonas_clicked(SCREEN_WIDTH-145,213+j*17,x,y,e))
+            {
+                submenu1_ok2=1;
+                submenu1_ok2_1=0;
+                strcpy (b,consum[j-1]);
+                g2=j-1;
+            }
+        }
+    }
+    if(strcmp(textinput,"")==0&&is_maxi_butonas_clicked(50,335,60,20,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_consum(textinput,textoutput,g1,g2);
+    }
+    else if(is_dynamic_butonas_clicked(textinput,50,335,x,y,e)&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        input(e,50,335);
+        trans_consum(textinput,textoutput,g1,g2);
+    }
+    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
+    {
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
+
 
 }
 
@@ -455,8 +1125,8 @@ int is_maxi_butonas_clicked(int a,int b,int a1,int b1,int c,int d,SDL_Event e)
 int is_dynamic_butonas_clicked(char scris[256],int a,int b,int c,int d,SDL_Event e)
 {
     SDL_Color textColor_red = { 255, 0, 0 };
-        gTextTexture4.loadFromRenderedText( scris, textColor_red,gFont4 );
-     if((c>= a)&&(d>=b)&&(c<=a+gTextTexture4.getWidth()+20)&&(d<=b+gTextTexture4.getHeight()+20)&&e.type==SDL_MOUSEBUTTONDOWN)
+    gTextTexture4.loadFromRenderedText( scris, textColor_red,gFont4 );
+    if((c>= a)&&(d>=b)&&(c<=a+gTextTexture4.getWidth()+20)&&(d<=b+gTextTexture4.getHeight()+20)&&e.type==SDL_MOUSEBUTTONDOWN)
         return 1;
     return 0;
 }
@@ -539,8 +1209,8 @@ void maxi_butonas_dynamic(char scris[256],int a,int b,int c,int d)
     int bines=0;
     SDL_Color textColor_blue = { 0, 0, 255 };
     SDL_Color textColor_red = { 255, 0, 0 };
-        gTextTexture4.loadFromRenderedText( scris, textColor_red,gFont4 );
-     if((c>= a)&&(d>=b)&&(c<=a+gTextTexture4.getWidth()+20)&&(d<=b+gTextTexture4.getHeight()+20))
+    gTextTexture4.loadFromRenderedText( scris, textColor_red,gFont4 );
+    if((c>= a)&&(d>=b)&&(c<=a+gTextTexture4.getWidth()+20)&&(d<=b+gTextTexture4.getHeight()+20))
         bines=1;
     if(bines==0)
         gTextTexture4.loadFromRenderedText( scris, textColor_blue,gFont4 );
@@ -563,7 +1233,7 @@ void butonas_dynamic_afisare(char scris[256],int a,int b)
     int bines=0;
     SDL_Color textColor_blue = { 0, 0, 255 };
     SDL_Color textColor_red = { 255, 0, 0 };
-     gTextTexture4.loadFromRenderedText( scris, textColor_blue,gFont4 );
+    gTextTexture4.loadFromRenderedText( scris, textColor_blue,gFont4 );
     SDL_Texture * surface_gig2 = SDL_CreateTextureFromSurface(gRenderer, button);
     SDL_Rect dstrect_buttonas = { 0, 0, 0, 0 };
     dstrect_buttonas.x=a;
