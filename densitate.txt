@@ -13,8 +13,8 @@ lb/gal(US)
 mg/cm^3
 mg/l
 mg/m^3
-oz(Av)/gal(UK)
-oz(Av)/gal(US)
-oz(Av)/ft^3
-oz(Av)/in^3
+oz/gal(UK)
+oz/gal(US)
+oz/ft^3
+oz/in^3
 t/m^3

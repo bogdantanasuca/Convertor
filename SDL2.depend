@@ -377,16 +377,16 @@
 	<stdio.h>
 	<string>
 
-1484166094 source:c:\users\manuel\desktop\sdl2\good.cpp
+1484269493 source:c:\users\manuel\desktop\sdl2\good.cpp
 	<iostream>
 	<fstream>
 	<SDL.h>
 	<SDL_image.h>
+	<SDL_mixer.h>
 	<stdio.h>
 	<string>
 	<cmath>
 	<SDL_ttf.h>
-	<windows.h>
 	<stdlib.h>
 	<cstdlib>
 	"render.h"
@@ -397,9 +397,10 @@
 	<conio.h>
 	<unistd.h>
 	<iomanip>
+	<windows.h>
 	"files+matrixes.h"
 
-1482900682 c:\users\manuel\desktop\sdl2\render.h
+1484269439 c:\users\manuel\desktop\sdl2\render.h
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -407,9 +408,8 @@
 	<string>
 	<cmath>
 	<SDL_ttf.h>
-	<windows.h>
 
-1482903827 c:\users\manuel\desktop\sdl2\media.h
+1484269422 c:\users\manuel\desktop\sdl2\media.h
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -417,15 +417,14 @@
 	<string>
 	<cmath>
 	<SDL_ttf.h>
-	<windows.h>
 
 1482315852 c:\users\manuel\desktop\sdl2\ok.h
 
-1484165809 c:\users\manuel\desktop\sdl2\files+matrixes.h
+1484167128 c:\users\manuel\desktop\sdl2\files+matrixes.h
 
-1482313816 c:\users\manuel\desktop\sdl2\siruri.h
+1484252783 c:\users\manuel\desktop\sdl2\siruri.h
 
-1484165451 c:\users\manuel\desktop\sdl2\transformari.h
+1484252785 c:\users\manuel\desktop\sdl2\transformari.h
 	<cstring>
 	<iomanip>
 	<math.h>
@@ -449,4 +448,13 @@
 	<conio.h>
 	<unistd.h>
 	<iomanip>
+
+1451801791 c:\users\manuel\desktop\sdl2\mingw_dev_lib\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
 

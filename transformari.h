@@ -269,7 +269,6 @@ char trans_volum(char x[256],char y[256],int i,int j)
 
 
 }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 char trans_timp(char x[256],char y[256],int i,int j)
 {
     long double f=trans_char_float(x);
@@ -277,85 +276,48 @@ char trans_timp(char x[256],char y[256],int i,int j)
     switch (i)
     {
     case 0 :
-        f=0.00001*f;
+        f=f/3600;
         break;
     case 1 :
-        f=0.000001*f;
+        f=f/60;
         break;
     case 2 :
-        f=0.0001*f;
-        break;
-    case 3 :
-        f=0.001*f;
-        break;
-    case 4 :
-        f=0.02832*f;
-        break;
-    case 5 :
-        f=0.004546*f;
-        break;
-    case 6 :
-        f=0.003785*f;
-        break;
-    case 7 :
-        f=0.000016387064*f;
-        break;
-    case 8 :
-        f=0.001*f;
-        break;
-    case 9 :
         f=1*f;
         break;
-    case 10 :
-        f=0.000001*f;
+    case 3 :
+        f=24*f;
         break;
-    case 11 :
-        f=0.764554858*f;
+    case 4 :
+        f=168*f;
+        break;
+    case 5 :
+        f=5208*f;
         break;
     }
 
     switch (j)
     {
     case 0 :
-        f=100000*f;
+        f=3600*f;
         break;
     case 1 :
-        f=1000000*f;
+        f=60*f;
         break;
     case 2 :
-        f=10000*f;
-        break;
-    case 3 :
-        f=1000*f;
-        break;
-    case 4 :
-        f=35.3146667*f;
-        break;
-    case 5 :
-        f=219.969157*f;
-        break;
-    case 6 :
-        f=264.172052*f;
-        break;
-    case 7 :
-        f=61023.7441*f;
-        break;
-    case 8 :
-        f=1000*f;
-        break;
-    case 9 :
         f=1*f;
         break;
-    case 10:
-        f=1000000*f;
+    case 3 :
+        f=f/24;
         break;
-    case 11:
-        f=1.30795062*f;
+    case 4 :
+        f=f/168;
+        break;
+    case 5 :
+        f=f/5208;
         break;
     }
     sprintf(y, "%lf", f);
 }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 char trans_viteza(char x[256],char y[256],int i,int j)
 {
     long double f=trans_char_float(x);
@@ -423,7 +385,7 @@ char trans_viteza(char x[256],char y[256],int i,int j)
 
     switch (j)
     {
-        case 0 :
+    case 0 :
         f=6000*f;
         break;
     case 1 :
@@ -705,7 +667,7 @@ char trans_presiune(char x[256],char y[256],int i,int j)
 
     switch (j)
     {
-        case 0 :
+    case 0 :
         f=0.000010197162129779282*f;
         break;
     case 1 :
@@ -833,7 +795,7 @@ char trans_densitate(char x[256],char y[256],int i,int j)
 
     switch (j)
     {
-        case 0 :
+    case 0 :
         f=0.001*f;
         break;
     case 1 :

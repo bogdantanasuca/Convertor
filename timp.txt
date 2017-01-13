@@ -1,10 +1,6 @@
-ms
-ns
 s
-micros
 min
 h
 z
 sapt
-l
-a
+luna

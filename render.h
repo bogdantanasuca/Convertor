@@ -5,7 +5,7 @@
 #include <string>
 #include <cmath>
 #include <SDL_ttf.h>
-#include <windows.h>
+
 
 //The window renderer
 SDL_Renderer* gRenderer = NULL;
@@ -15,6 +15,7 @@ TTF_Font *gFont = NULL;
 TTF_Font *gFont2 = NULL;
 TTF_Font *gFont3 = NULL;
 TTF_Font *gFont4 = NULL;
+TTF_Font *gFont5 = NULL;
 
 
 

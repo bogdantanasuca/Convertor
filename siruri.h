@@ -1,5 +1,5 @@
 
 //siruri pentru submeniuri -butoane
 
-char a[12];
-char b[12];
+char a[256];
+char b[256];

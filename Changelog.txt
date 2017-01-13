@@ -20,4 +20,9 @@ version 0.(6)(beta)
 -still beta :(
 -added all the menus(it works!!)
 -kinda ready
-
+version 1.0(full release)
+-fixed some graphical issues(part 2)
+-added music
+-added an icon
+-did some organization
+-added a nice pic and a title for each submenu

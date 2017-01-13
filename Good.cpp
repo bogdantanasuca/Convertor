@@ -5,11 +5,12 @@
 #include <fstream>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <stdio.h>
 #include <string>
 #include <cmath>
 #include <SDL_ttf.h>
-#include <windows.h>
+
 #include <stdlib.h>
 #include <cstdlib>
 #include "render.h"
@@ -20,8 +21,8 @@
 #include <conio.h>
 #include <unistd.h>
 #include <iomanip>
-
-
+#define _WIN32_WINNT 0x0500
+#include<windows.h>
 int lung;
 SDL_Texture* MENU1;
 //The window we'll be rendering to
@@ -57,11 +58,13 @@ void quit_button_back(int x,int y,SDL_Event e);
 bool quit = false;
 //Rendered texture
 
-void butonas(char scris[30],int b,int c,int d,int e);
-void mini_butonas(char scris[30],int b,int c,int d,int e);
+void butonas(char scris[256],int b,int c,int d,int e);
+void butonas1(char scris[256],int b,int c,int d,int e);
+void mini_butonas(char scris[256],int b,int c,int d,int e);
 void maxi_butonas(char scris[256],int a,int b,int a1,int b1,int c,int d);
 void maxi_butonas_dynamic(char scris[256],int a,int b,int c,int d);
 int is_butonas_clicked(int b,int c,int d,int e,SDL_Event a);
+int is_butonas1_clicked(int b,int c,int d,int e,SDL_Event a);
 int is_mini_butonas_clicked(int b,int c,int d,int e,SDL_Event a);
 int is_maxi_butonas_clicked(int a,int b,int a1,int b1,int c,int d,SDL_Event e);
 void butonas_dynamic_afisare(char scris[256],int a,int b);
@@ -74,19 +77,32 @@ int g1,g2;
 
 void submeniu1(int x,int y,SDL_Event e)
 {
+
     int j,i;
     citire_lungime(lungime);
+    SDL_RenderCopy(gRenderer, surface_prisma, NULL, &dstrect_prisma);
     quit_button_back(x,y,e);
+
     if(submenu1_ok1_1)
         strcpy (a,"Select");
-    butonas(a,55,200,x,y);
-    if(is_butonas_clicked(55,200,x,y,e))
+    butonas1(a,35,200,x,y);
+    if(is_butonas1_clicked(35,200,x,y,e))
     {
-        SDL_RenderPresent( gRenderer );
+        //SDL_RenderPresent( gRenderer );
         submenu1_ok1=0;
     }
     if(!submenu1_ok1_1 && strcmp("",textinput))
         maxi_butonas_dynamic(textinput,50,335,x,y);
+
+
+    if(strcmp("",textoutput)!=0&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        trans_lungime(textinput,textoutput,g1,g2);
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
+
+
     if(!submenu1_ok1_1 && !strcmp("",textinput))
     {
         if(submenu1_ok2_1==0)
@@ -111,8 +127,8 @@ void submeniu1(int x,int y,SDL_Event e)
     }
     if(submenu1_ok2_1)
         strcpy (b,"Select");
-    butonas(b,SCREEN_WIDTH-145,200,x,y);
-    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+    butonas1(b,SCREEN_WIDTH-165,200,x,y);
+    if(is_butonas1_clicked(SCREEN_WIDTH-165,200,x,y,e))
         submenu1_ok2=0;
     if(!submenu1_ok2)
     {
@@ -138,27 +154,34 @@ void submeniu1(int x,int y,SDL_Event e)
         input(e,50,335);
         trans_lungime(textinput,textoutput,g1,g2);
     }
-    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
-    {
-        textoutput[16]='\0';
-        butonas_dynamic_afisare(textoutput,50,500);
-    }
+    gMenuTexture1.render( ( SCREEN_WIDTH - gMenuTexture1.getWidth() ) / 2, SCREEN_HEIGHT / 6+35 );
 }
 void submeniu2(int x,int y,SDL_Event e)
 {
     int j,i;
     citire_arie(arie);
+    SDL_RenderCopy(gRenderer, surface_prisma, NULL, &dstrect_prisma);
     quit_button_back(x,y,e);
     if(submenu1_ok1_1)
         strcpy (a,"Select");
-    butonas(a,55,200,x,y);
-    if(is_butonas_clicked(55,200,x,y,e))
+    butonas1(a,35,200,x,y);
+    if(is_butonas1_clicked(35,200,x,y,e))
     {
-        SDL_RenderPresent( gRenderer );
+        //SDL_RenderPresent( gRenderer );
         submenu1_ok1=0;
     }
     if(!submenu1_ok1_1 && strcmp("",textinput))
         maxi_butonas_dynamic(textinput,50,335,x,y);
+
+
+    if(strcmp("",textoutput)!=0&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        trans_arie(textinput,textoutput,g1,g2);
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
+
+
     if(!submenu1_ok1_1 && !strcmp("",textinput))
     {
         if(submenu1_ok2_1==0)
@@ -183,8 +206,8 @@ void submeniu2(int x,int y,SDL_Event e)
     }
     if(submenu1_ok2_1)
         strcpy (b,"Select");
-    butonas(b,SCREEN_WIDTH-145,200,x,y);
-    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+    butonas1(b,SCREEN_WIDTH-165,200,x,y);
+    if(is_butonas1_clicked(SCREEN_WIDTH-165,200,x,y,e))
         submenu1_ok2=0;
     if(!submenu1_ok2)
     {
@@ -210,28 +233,35 @@ void submeniu2(int x,int y,SDL_Event e)
         input(e,50,335);
         trans_arie(textinput,textoutput,g1,g2);
     }
-    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
-    {
-        textoutput[16]='\0';
-        butonas_dynamic_afisare(textoutput,50,500);
-    }
 
+    gMenuTexture2.render( ( SCREEN_WIDTH - gMenuTexture2.getWidth() ) / 2, SCREEN_HEIGHT / 6+35 );
 }
 void submeniu3(int x,int y,SDL_Event e)
 {
     int j,i;
     citire_volum(volum);
+    SDL_RenderCopy(gRenderer, surface_prisma, NULL, &dstrect_prisma);
     quit_button_back(x,y,e);
     if(submenu1_ok1_1)
         strcpy (a,"Select");
-    butonas(a,55,200,x,y);
-    if(is_butonas_clicked(55,200,x,y,e))
+    butonas1(a,35,200,x,y);
+    if(is_butonas1_clicked(35,200,x,y,e))
     {
-        SDL_RenderPresent( gRenderer );
+        //SDL_RenderPresent( gRenderer );
         submenu1_ok1=0;
     }
     if(!submenu1_ok1_1 && strcmp("",textinput))
         maxi_butonas_dynamic(textinput,50,335,x,y);
+
+
+    if(strcmp("",textoutput)!=0&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        trans_volum(textinput,textoutput,g1,g2);
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
+
+
     if(!submenu1_ok1_1 && !strcmp("",textinput))
     {
         if(submenu1_ok2_1==0)
@@ -256,8 +286,8 @@ void submeniu3(int x,int y,SDL_Event e)
     }
     if(submenu1_ok2_1)
         strcpy (b,"Select");
-    butonas(b,SCREEN_WIDTH-145,200,x,y);
-    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+    butonas1(b,SCREEN_WIDTH-165,200,x,y);
+    if(is_butonas1_clicked(SCREEN_WIDTH-165,200,x,y,e))
         submenu1_ok2=0;
     if(!submenu1_ok2)
     {
@@ -283,29 +313,35 @@ void submeniu3(int x,int y,SDL_Event e)
         input(e,50,335);
         trans_volum(textinput,textoutput,g1,g2);
     }
-    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
+
+    gMenuTexture3.render( ( SCREEN_WIDTH - gMenuTexture3.getWidth() ) / 2, SCREEN_HEIGHT / 6+35 );
+}
+void submeniu4(int x,int y,SDL_Event e)
+{
+    int j,i;
+    citire_timp(timp);
+    SDL_RenderCopy(gRenderer, surface_prisma, NULL, &dstrect_prisma);
+    quit_button_back(x,y,e);
+    if(submenu1_ok1_1)
+        strcpy (a,"Select");
+    butonas1(a,35,200,x,y);
+    if(is_butonas1_clicked(35,200,x,y,e))
     {
+        //SDL_RenderPresent( gRenderer );
+        submenu1_ok1=0;
+    }
+    if(!submenu1_ok1_1 && strcmp("",textinput))
+        maxi_butonas_dynamic(textinput,50,335,x,y);
+
+
+    if(strcmp("",textoutput)!=0&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        trans_timp(textinput,textoutput,g1,g2);
         textoutput[16]='\0';
         butonas_dynamic_afisare(textoutput,50,500);
     }
 
 
-}
-void submeniu4(int x,int y,SDL_Event e)
-{
-   int j,i;
-    citire_timp(timp);
-    quit_button_back(x,y,e);
-    if(submenu1_ok1_1)
-        strcpy (a,"Select");
-    butonas(a,55,200,x,y);
-    if(is_butonas_clicked(55,200,x,y,e))
-    {
-        SDL_RenderPresent( gRenderer );
-        submenu1_ok1=0;
-    }
-    if(!submenu1_ok1_1 && strcmp("",textinput))
-        maxi_butonas_dynamic(textinput,50,335,x,y);
     if(!submenu1_ok1_1 && !strcmp("",textinput))
     {
         if(submenu1_ok2_1==0)
@@ -314,7 +350,7 @@ void submeniu4(int x,int y,SDL_Event e)
     if(!submenu1_ok1)
     {
         int submenu1_ok1_openleftdropmenu=1;
-        for(i=1; i<=10; i++)
+        for(i=1; i<=6; i++)
         {
             mini_butonas(timp[i-1],55,213+i*17,x,y);
             if(is_mini_butonas_clicked(55,213+i*17,x,y,e))
@@ -330,12 +366,12 @@ void submeniu4(int x,int y,SDL_Event e)
     }
     if(submenu1_ok2_1)
         strcpy (b,"Select");
-    butonas(b,SCREEN_WIDTH-145,200,x,y);
-    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+    butonas1(b,SCREEN_WIDTH-165,200,x,y);
+    if(is_butonas1_clicked(SCREEN_WIDTH-165,200,x,y,e))
         submenu1_ok2=0;
     if(!submenu1_ok2)
     {
-        for(j=1; j<=10; j++)
+        for(j=1; j<=6; j++)
         {
             mini_butonas(timp[j-1],SCREEN_WIDTH-145,213+j*17,x,y);
             if(is_mini_butonas_clicked(SCREEN_WIDTH-145,213+j*17,x,y,e))
@@ -357,27 +393,34 @@ void submeniu4(int x,int y,SDL_Event e)
         input(e,50,335);
         trans_timp(textinput,textoutput,g1,g2);
     }
-    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
-    {
-        textoutput[16]='\0';
-        butonas_dynamic_afisare(textoutput,50,500);
-    }
+    gMenuTexture4.render( ( SCREEN_WIDTH - gMenuTexture4.getWidth() ) / 2, SCREEN_HEIGHT / 6+35 );
 }
 void submeniu5(int x,int y,SDL_Event e)
 {
-       int j,i;
+    int j,i;
     citire_viteza(viteza);
+    SDL_RenderCopy(gRenderer, surface_prisma, NULL, &dstrect_prisma);
     quit_button_back(x,y,e);
     if(submenu1_ok1_1)
         strcpy (a,"Select");
-    butonas(a,55,200,x,y);
-    if(is_butonas_clicked(55,200,x,y,e))
+    butonas1(a,35,200,x,y);
+    if(is_butonas1_clicked(35,200,x,y,e))
     {
-        SDL_RenderPresent( gRenderer );
+        //SDL_RenderPresent( gRenderer );
         submenu1_ok1=0;
     }
     if(!submenu1_ok1_1 && strcmp("",textinput))
         maxi_butonas_dynamic(textinput,50,335,x,y);
+
+
+    if(strcmp("",textoutput)!=0&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        trans_viteza(textinput,textoutput,g1,g2);
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
+
+
     if(!submenu1_ok1_1 && !strcmp("",textinput))
     {
         if(submenu1_ok2_1==0)
@@ -402,8 +445,8 @@ void submeniu5(int x,int y,SDL_Event e)
     }
     if(submenu1_ok2_1)
         strcpy (b,"Select");
-    butonas(b,SCREEN_WIDTH-145,200,x,y);
-    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+    butonas1(b,SCREEN_WIDTH-165,200,x,y);
+    if(is_butonas1_clicked(SCREEN_WIDTH-165,200,x,y,e))
         submenu1_ok2=0;
     if(!submenu1_ok2)
     {
@@ -429,27 +472,34 @@ void submeniu5(int x,int y,SDL_Event e)
         input(e,50,335);
         trans_viteza(textinput,textoutput,g1,g2);
     }
-    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
-    {
-        textoutput[16]='\0';
-        butonas_dynamic_afisare(textoutput,50,500);
-    }
+    gMenuTexture5.render( ( SCREEN_WIDTH - gMenuTexture5.getWidth() ) / 2, SCREEN_HEIGHT / 6+35 );
 }
 void submeniu6(int x,int y,SDL_Event e)
 {
-          int j,i;
+    int j,i;
     citire_temperatura(temperatura);
+    SDL_RenderCopy(gRenderer, surface_prisma, NULL, &dstrect_prisma);
     quit_button_back(x,y,e);
     if(submenu1_ok1_1)
         strcpy (a,"Select");
-    butonas(a,55,200,x,y);
-    if(is_butonas_clicked(55,200,x,y,e))
+    butonas1(a,35,200,x,y);
+    if(is_butonas1_clicked(35,200,x,y,e))
     {
-        SDL_RenderPresent( gRenderer );
+        //SDL_RenderPresent( gRenderer );
         submenu1_ok1=0;
     }
     if(!submenu1_ok1_1 && strcmp("",textinput))
         maxi_butonas_dynamic(textinput,50,335,x,y);
+
+
+    if(strcmp("",textoutput)!=0&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        trans_temperatura(textinput,textoutput,g1,g2);
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
+
+
     if(!submenu1_ok1_1 && !strcmp("",textinput))
     {
         if(submenu1_ok2_1==0)
@@ -474,8 +524,8 @@ void submeniu6(int x,int y,SDL_Event e)
     }
     if(submenu1_ok2_1)
         strcpy (b,"Select");
-    butonas(b,SCREEN_WIDTH-145,200,x,y);
-    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+    butonas1(b,SCREEN_WIDTH-165,200,x,y);
+    if(is_butonas1_clicked(SCREEN_WIDTH-165,200,x,y,e))
         submenu1_ok2=0;
     if(!submenu1_ok2)
     {
@@ -501,27 +551,34 @@ void submeniu6(int x,int y,SDL_Event e)
         input(e,50,335);
         trans_temperatura(textinput,textoutput,g1,g2);
     }
-    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
-    {
-        textoutput[16]='\0';
-        butonas_dynamic_afisare(textoutput,50,500);
-    }
+    gMenuTexture6.render( ( SCREEN_WIDTH - gMenuTexture6.getWidth() ) / 2, SCREEN_HEIGHT / 6+35 );
 }
 void submeniu7(int x,int y,SDL_Event e)
 {
-             int j,i;
+    int j,i;
     citire_masa(masa);
+    SDL_RenderCopy(gRenderer, surface_prisma, NULL, &dstrect_prisma);
     quit_button_back(x,y,e);
     if(submenu1_ok1_1)
         strcpy (a,"Select");
-    butonas(a,55,200,x,y);
-    if(is_butonas_clicked(55,200,x,y,e))
+    butonas1(a,35,200,x,y);
+    if(is_butonas1_clicked(35,200,x,y,e))
     {
-        SDL_RenderPresent( gRenderer );
+        //SDL_RenderPresent( gRenderer );
         submenu1_ok1=0;
     }
     if(!submenu1_ok1_1 && strcmp("",textinput))
         maxi_butonas_dynamic(textinput,50,335,x,y);
+
+
+    if(strcmp("",textoutput)!=0&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        trans_masa(textinput,textoutput,g1,g2);
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
+
+
     if(!submenu1_ok1_1 && !strcmp("",textinput))
     {
         if(submenu1_ok2_1==0)
@@ -546,8 +603,8 @@ void submeniu7(int x,int y,SDL_Event e)
     }
     if(submenu1_ok2_1)
         strcpy (b,"Select");
-    butonas(b,SCREEN_WIDTH-145,200,x,y);
-    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+    butonas1(b,SCREEN_WIDTH-165,200,x,y);
+    if(is_butonas1_clicked(SCREEN_WIDTH-165,200,x,y,e))
         submenu1_ok2=0;
     if(!submenu1_ok2)
     {
@@ -573,27 +630,34 @@ void submeniu7(int x,int y,SDL_Event e)
         input(e,50,335);
         trans_masa(textinput,textoutput,g1,g2);
     }
-    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
-    {
-        textoutput[16]='\0';
-        butonas_dynamic_afisare(textoutput,50,500);
-    }
+    gMenuTexture7.render( ( SCREEN_WIDTH - gMenuTexture7.getWidth() ) / 2, SCREEN_HEIGHT / 6+35 );
 }
 void submeniu8(int x,int y,SDL_Event e)
 {
-             int j,i;
+    int j,i;
     citire_energie(energie);
+    SDL_RenderCopy(gRenderer, surface_prisma, NULL, &dstrect_prisma);
     quit_button_back(x,y,e);
     if(submenu1_ok1_1)
         strcpy (a,"Select");
-    butonas(a,55,200,x,y);
-    if(is_butonas_clicked(55,200,x,y,e))
+    butonas1(a,35,200,x,y);
+    if(is_butonas1_clicked(35,200,x,y,e))
     {
-        SDL_RenderPresent( gRenderer );
+        //SDL_RenderPresent( gRenderer );
         submenu1_ok1=0;
     }
     if(!submenu1_ok1_1 && strcmp("",textinput))
         maxi_butonas_dynamic(textinput,50,335,x,y);
+
+
+    if(strcmp("",textoutput)!=0&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        trans_energie(textinput,textoutput,g1,g2);
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
+
+
     if(!submenu1_ok1_1 && !strcmp("",textinput))
     {
         if(submenu1_ok2_1==0)
@@ -618,8 +682,8 @@ void submeniu8(int x,int y,SDL_Event e)
     }
     if(submenu1_ok2_1)
         strcpy (b,"Select");
-    butonas(b,SCREEN_WIDTH-145,200,x,y);
-    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+    butonas1(b,SCREEN_WIDTH-165,200,x,y);
+    if(is_butonas1_clicked(SCREEN_WIDTH-165,200,x,y,e))
         submenu1_ok2=0;
     if(!submenu1_ok2)
     {
@@ -645,27 +709,35 @@ void submeniu8(int x,int y,SDL_Event e)
         input(e,50,335);
         trans_energie(textinput,textoutput,g1,g2);
     }
-    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
-    {
-        textoutput[16]='\0';
-        butonas_dynamic_afisare(textoutput,50,500);
-    }
+    gMenuTexture8.render( ( SCREEN_WIDTH - gMenuTexture8.getWidth() ) / 2, SCREEN_HEIGHT / 6+35 );
 }
 void submeniu9(int x,int y,SDL_Event e)
 {
-                 int j,i;
+    int j,i;
     citire_presiune(presiune);
+    SDL_RenderCopy(gRenderer, surface_prisma, NULL, &dstrect_prisma);
     quit_button_back(x,y,e);
     if(submenu1_ok1_1)
         strcpy (a,"Select");
-    butonas(a,55,200,x,y);
-    if(is_butonas_clicked(55,200,x,y,e))
+    butonas1(a,35,200,x,y);
+    if(is_butonas1_clicked(35,200,x,y,e))
     {
-        SDL_RenderPresent( gRenderer );
+        //SDL_RenderPresent( gRenderer );
         submenu1_ok1=0;
     }
     if(!submenu1_ok1_1 && strcmp("",textinput))
         maxi_butonas_dynamic(textinput,50,335,x,y);
+
+
+
+    if(strcmp("",textoutput)!=0&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        trans_presiune(textinput,textoutput,g1,g2);
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
+
+
     if(!submenu1_ok1_1 && !strcmp("",textinput))
     {
         if(submenu1_ok2_1==0)
@@ -690,8 +762,8 @@ void submeniu9(int x,int y,SDL_Event e)
     }
     if(submenu1_ok2_1)
         strcpy (b,"Select");
-    butonas(b,SCREEN_WIDTH-145,200,x,y);
-    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+    butonas1(b,SCREEN_WIDTH-165,200,x,y);
+    if(is_butonas1_clicked(SCREEN_WIDTH-165,200,x,y,e))
         submenu1_ok2=0;
     if(!submenu1_ok2)
     {
@@ -717,27 +789,34 @@ void submeniu9(int x,int y,SDL_Event e)
         input(e,50,335);
         trans_presiune(textinput,textoutput,g1,g2);
     }
-    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
-    {
-        textoutput[16]='\0';
-        butonas_dynamic_afisare(textoutput,50,500);
-    }
+    gMenuTexture9.render( ( SCREEN_WIDTH - gMenuTexture9.getWidth() ) / 2, SCREEN_HEIGHT / 6+35 );
 }
 void submeniu10(int x,int y,SDL_Event e)
 {
-                     int j,i;
+    int j,i;
     citire_densitate(densitate);
+    SDL_RenderCopy(gRenderer, surface_prisma, NULL, &dstrect_prisma);
     quit_button_back(x,y,e);
     if(submenu1_ok1_1)
         strcpy (a,"Select");
-    butonas(a,55,200,x,y);
-    if(is_butonas_clicked(55,200,x,y,e))
+    butonas1(a,35,200,x,y);
+    if(is_butonas1_clicked(35,200,x,y,e))
     {
-        SDL_RenderPresent( gRenderer );
+        //SDL_RenderPresent( gRenderer );
         submenu1_ok1=0;
     }
     if(!submenu1_ok1_1 && strcmp("",textinput))
         maxi_butonas_dynamic(textinput,50,335,x,y);
+
+
+    if(strcmp("",textoutput)!=0&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        trans_densitate(textinput,textoutput,g1,g2);
+        textoutput[16]='\0';
+        butonas_dynamic_afisare(textoutput,50,500);
+    }
+
+
     if(!submenu1_ok1_1 && !strcmp("",textinput))
     {
         if(submenu1_ok2_1==0)
@@ -762,8 +841,8 @@ void submeniu10(int x,int y,SDL_Event e)
     }
     if(submenu1_ok2_1)
         strcpy (b,"Select");
-    butonas(b,SCREEN_WIDTH-145,200,x,y);
-    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+    butonas1(b,SCREEN_WIDTH-165,200,x,y);
+    if(is_butonas1_clicked(SCREEN_WIDTH-165,200,x,y,e))
         submenu1_ok2=0;
     if(!submenu1_ok2)
     {
@@ -789,33 +868,45 @@ void submeniu10(int x,int y,SDL_Event e)
         input(e,50,335);
         trans_densitate(textinput,textoutput,g1,g2);
     }
-    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
+
+
+    gMenuTexture10.render( ( SCREEN_WIDTH - gMenuTexture10.getWidth() ) / 2, SCREEN_HEIGHT / 6+35 );
+}
+void submeniu11(int x,int y,SDL_Event e)
+{
+    int j,i;
+    citire_consum(consum);
+    SDL_RenderCopy(gRenderer, surface_prisma, NULL, &dstrect_prisma);
+    quit_button_back(x,y,e);
+    if(submenu1_ok1_1)
+        strcpy (a,"Select");
+    butonas1(a,35,200,x,y);
+    if(is_butonas1_clicked(35,200,x,y,e))
     {
+        //SDL_RenderPresent( gRenderer );
+        submenu1_ok1=0;
+    }
+    if(!submenu1_ok1_1 && strcmp("",textinput))
+    {
+        maxi_butonas_dynamic(textinput,50,335,x,y);
+
+    }
+
+
+    if(strcmp("",textoutput)!=0&&!submenu1_ok1_openleftdropmenu&&submenu1_ok2_1==0)
+    {
+        trans_consum(textinput,textoutput,g1,g2);
         textoutput[16]='\0';
         butonas_dynamic_afisare(textoutput,50,500);
     }
 
-}
-void submeniu11(int x,int y,SDL_Event e)
-{
-                      int j,i;
-    citire_consum(consum);
-    quit_button_back(x,y,e);
-    if(submenu1_ok1_1)
-        strcpy (a,"Select");
-    butonas(a,55,200,x,y);
-    if(is_butonas_clicked(55,200,x,y,e))
-    {
-        SDL_RenderPresent( gRenderer );
-        submenu1_ok1=0;
-    }
-    if(!submenu1_ok1_1 && strcmp("",textinput))
-        maxi_butonas_dynamic(textinput,50,335,x,y);
+
     if(!submenu1_ok1_1 && !strcmp("",textinput))
     {
         if(submenu1_ok2_1==0)
             maxi_butonas("",50,335,60,20,x,y);
     }
+
     if(!submenu1_ok1)
     {
         int submenu1_ok1_openleftdropmenu=1;
@@ -835,8 +926,8 @@ void submeniu11(int x,int y,SDL_Event e)
     }
     if(submenu1_ok2_1)
         strcpy (b,"Select");
-    butonas(b,SCREEN_WIDTH-145,200,x,y);
-    if(is_butonas_clicked(SCREEN_WIDTH-145,200,x,y,e))
+    butonas1(b,SCREEN_WIDTH-165,200,x,y);
+    if(is_butonas1_clicked(SCREEN_WIDTH-165,200,x,y,e))
         submenu1_ok2=0;
     if(!submenu1_ok2)
     {
@@ -862,13 +953,7 @@ void submeniu11(int x,int y,SDL_Event e)
         input(e,50,335);
         trans_consum(textinput,textoutput,g1,g2);
     }
-    if(strcmp("",textoutput)!=0&&strcmp("",textinput))
-    {
-        textoutput[16]='\0';
-        butonas_dynamic_afisare(textoutput,50,500);
-    }
-
-
+    gMenuTexture11.render( ( SCREEN_WIDTH - gMenuTexture11.getWidth() ) / 2, SCREEN_HEIGHT / 6+35 );
 }
 
 
@@ -918,6 +1003,13 @@ bool init()
                 //Initialize renderer color
                 SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
+                SDL_Surface *surface;     // Declare an SDL_Surface to be filled in with pixel data from an image file
+                surface = SDL_LoadBMP( "Media/icon.bmp" );
+
+                // The icon is attached to the window pointer
+                SDL_SetWindowIcon(gWindow, surface);
+                SDL_FreeSurface(surface);
+
                 //Initialize PNG loading
                 int imgFlags = IMG_INIT_PNG;
                 if( !( IMG_Init( imgFlags ) & imgFlags ) )
@@ -930,6 +1022,11 @@ bool init()
                 if( TTF_Init() == -1 )
                 {
                     printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+                    success = false;
+                }
+                if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+                {
+                    printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
                     success = false;
                 }
             }
@@ -949,7 +1046,11 @@ void close()
     //Free global font
     TTF_CloseFont( gFont );
     gFont = NULL;
-
+    //Free the music
+    Mix_FreeMusic( gMusic1 );
+    gMusic1 = NULL;
+    Mix_FreeMusic( gMusic2 );
+    gMusic2 = NULL;
     //Destroy window
     SDL_DestroyRenderer( gRenderer );
     SDL_DestroyWindow( gWindow );
@@ -966,6 +1067,7 @@ void close()
 
 int main( int argc, char* args[] )
 {
+    ShowWindow( GetConsoleWindow(), SW_HIDE );
     int x,y,a,b,c,d;//Start up SDL and create window
 
     if( !init() )
@@ -1066,8 +1168,73 @@ int main( int argc, char* args[] )
                         submeniu11(x,y,e);
 
                     background();
-                    //SDL_RenderPresent( gRenderer );
-                    //Render red filled quad
+                    if( e.type == SDL_KEYDOWN )
+                    {
+                        switch( e.key.keysym.sym )
+                        {
+                        case SDLK_1:
+                            //If there is no music playing
+                            if( Mix_PlayingMusic() == 0 )
+                            {
+                                //Play the music
+                                Mix_PlayMusic( gMusic1, -1 );
+                            }
+                            //If music is being played
+                            else
+                            {
+                                //If the music is paused
+                                if( Mix_PausedMusic() == 1 )
+                                {
+                                    //Resume the music
+                                    Mix_ResumeMusic();
+                                }
+                                //If the music is playing
+                                else
+                                {
+                                    //Pause the music
+                                    Mix_PauseMusic();
+                                }
+                            }
+                            break;
+                        case SDLK_2:
+                            //If there is no music playing
+                            if( Mix_PlayingMusic() == 0 )
+                            {
+                                //Play the music
+                                Mix_PlayMusic( gMusic2, -1 );
+                            }
+                            //If music is being played
+                            else
+                            {
+                                //If the music is paused
+                                if( Mix_PausedMusic() == 1 )
+                                {
+                                    //Resume the music
+                                    Mix_ResumeMusic();
+                                }
+                                //If the music is playing
+                                else
+                                {
+                                    //Pause the music
+                                    Mix_PauseMusic();
+                                }
+                            }
+                            break;
+
+                        case SDLK_3:
+                            //Stop the music
+                            Mix_HaltMusic();
+                            break;
+                        case SDLK_4:
+                            //close console
+                             ShowWindow( GetConsoleWindow(), SW_HIDE );
+                            break;
+                        case SDLK_5:
+                            //Show the console
+                             ShowWindow( GetConsoleWindow(), SW_RESTORE );
+                            break;
+                        }
+                    }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1085,7 +1252,7 @@ int main( int argc, char* args[] )
                     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                    //Update s      creen
+                    //Update screen
                     SDL_RenderPresent( gRenderer );
                     cout<<gTextTexture2.getHeight()<<endl;
                     //Update screen
@@ -1104,15 +1271,32 @@ int main( int argc, char* args[] )
 
     exit(0);
 }
+void color_background(char scris[256],int b,int c)
+{
+    SDL_Texture * surface_gig = SDL_CreateTextureFromSurface(gRenderer, background_color);
+    SDL_Rect dstrect_buttonas = { 0, 0, 290, 50 };
+    dstrect_buttonas.x=b;
+    dstrect_buttonas.y=c;
+
+    SDL_RenderCopy(gRenderer, surface_gig, NULL, &dstrect_buttonas);
+
+
+}
 int is_butonas_clicked(int b,int c,int d,int e,SDL_Event a)
 {
     if((d>= b)&&(e>=c)&&(d<=b+90)&&(e<=c+30)&&a.type==SDL_MOUSEBUTTONDOWN)
         return 1;
     return 0;
 }
+int is_butonas1_clicked(int b,int c,int d,int e,SDL_Event a)
+{
+    if((d>= b)&&(e>=c)&&(d<=b+130)&&(e<=c+30)&&a.type==SDL_MOUSEBUTTONDOWN)
+        return 1;
+    return 0;
+}
 int is_mini_butonas_clicked(int b,int c,int d,int e,SDL_Event a)
 {
-    if((d>= b)&&(e>=c)&&(d<=b+74)&&(e<=c+17)&&a.type==SDL_MOUSEBUTTONDOWN)
+    if((d>= b)&&(e>=c)&&(d<=b+90)&&(e<=c+17)&&a.type==SDL_MOUSEBUTTONDOWN)
         return 1;
     return 0;
 }
@@ -1122,6 +1306,7 @@ int is_maxi_butonas_clicked(int a,int b,int a1,int b1,int c,int d,SDL_Event e)
         return 1;
     return 0;
 }
+
 int is_dynamic_butonas_clicked(char scris[256],int a,int b,int c,int d,SDL_Event e)
 {
     SDL_Color textColor_red = { 255, 0, 0 };
@@ -1130,7 +1315,7 @@ int is_dynamic_butonas_clicked(char scris[256],int a,int b,int c,int d,SDL_Event
         return 1;
     return 0;
 }
-void butonas(char scris[30],int b,int c,int d,int e)
+void butonas(char scris[256],int b,int c,int d,int e)
 {
     int a=0;
     SDL_Color textColor_blue = { 0, 0, 255 };
@@ -1150,35 +1335,44 @@ void butonas(char scris[30],int b,int c,int d,int e)
     gTextTexture3.render( (90- gTextTexture3.getWidth() ) / 2+b, (30- gTextTexture3.getHeight() ) / 2 +c);
 
 }
-void color_background(char scris[30],int b,int c)
+void butonas1(char scris[256],int b,int c,int d,int e)
 {
-    SDL_Texture * surface_gig = SDL_CreateTextureFromSurface(gRenderer, background_color);
-    SDL_Rect dstrect_buttonas = { 0, 0, 290, 50 };
+    int a=0;
+    SDL_Color textColor_blue = { 0, 0, 255 };
+    SDL_Color textColor_red = { 255, 0, 0 };
+    SDL_Texture * surface_gig = SDL_CreateTextureFromSurface(gRenderer, button1);
+    SDL_Rect dstrect_buttonas = { 0, 0, 130, 30 };
     dstrect_buttonas.x=b;
     dstrect_buttonas.y=c;
 
     SDL_RenderCopy(gRenderer, surface_gig, NULL, &dstrect_buttonas);
-
+    if((d>= b)&&(e>=c)&&(d<=b+130)&&(e<=c+30))
+        a=1;
+    if(a==0)
+        gTextTexture3.loadFromRenderedText( scris, textColor_blue,gFont3 );
+    else
+        gTextTexture3.loadFromRenderedText( scris, textColor_red,gFont3 );
+    gTextTexture3.render( (130- gTextTexture3.getWidth() ) / 2+b, (30- gTextTexture3.getHeight() ) / 2 +c);
 
 }
-void mini_butonas(char scris[30],int b,int c,int d,int e)
+void mini_butonas(char scris[256],int b,int c,int d,int e)
 {
     int a=0;
     SDL_Color textColor_blue = { 0, 0, 255 };
     SDL_Color textColor_red = { 255, 0, 0 };
     SDL_Texture * surface_gig = SDL_CreateTextureFromSurface(gRenderer, mini_button);
-    SDL_Rect dstrect_buttonas = { 0, 0, 74, 17 };
+    SDL_Rect dstrect_buttonas = { 0, 0, 90, 17 };
     dstrect_buttonas.x=b;
     dstrect_buttonas.y=c;
 
     SDL_RenderCopy(gRenderer, surface_gig, NULL, &dstrect_buttonas);
-    if((d>= b)&&(e>=c)&&(d<=b+74)&&(e<=c+17))
+    if((d>= b)&&(e>=c)&&(d<=b+90)&&(e<=c+17))
         a=1;
     if(a==0)
         gTextTexture4.loadFromRenderedText( scris, textColor_blue,gFont4 );
     else
         gTextTexture4.loadFromRenderedText( scris, textColor_red,gFont4 );
-    gTextTexture4.render( (74- gTextTexture4.getWidth() ) / 2+b, (17- gTextTexture4.getHeight() ) / 2 +c);
+    gTextTexture4.render( (90- gTextTexture4.getWidth() ) / 2+b, (17- gTextTexture4.getHeight() ) / 2 +c);
 
 }
 
@@ -1405,7 +1599,7 @@ void meniu(int x,int y,SDL_Event e)
         ok_menu=0;
         ok_submenu11=1;
     }
-
+    gTextTexture5.render( ( SCREEN_WIDTH - gTextTexture5.getWidth() ) / 2, SCREEN_HEIGHT / 6+35 );
     quit_button(x,y,e);
 }
 
@@ -1416,17 +1610,17 @@ void background()
 
     SDL_Rect outlineRect = { SCREEN_WIDTH / 6, SCREEN_HEIGHT / 6, SCREEN_WIDTH * 2 / 3, SCREEN_HEIGHT * 2 / 3 };
     SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF, 0x00, 0xFF );
-    SDL_RenderDrawRect( gRenderer, &outlineRect );
-
-    //Draw blue horizontal line
-    SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF );
-    SDL_RenderDrawLine( gRenderer, 0, SCREEN_HEIGHT / 2, SCREEN_WIDTH, SCREEN_HEIGHT / 2 );
-
+    //SDL_RenderDrawRect( gRenderer, &outlineRect );
+    /*
+        //Draw blue horizontal line
+        SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF );
+        SDL_RenderDrawLine( gRenderer, 0, SCREEN_HEIGHT / 2, SCREEN_WIDTH, SCREEN_HEIGHT / 2 );
+    */
     //Draw vertical line of yellow dots
-
-    SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF );
-    SDL_RenderDrawLine( gRenderer, SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, SCREEN_HEIGHT  );
-
+    /*
+        SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF );
+        SDL_RenderDrawLine( gRenderer, SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, SCREEN_HEIGHT  );
+    */
 
     SDL_SetRenderDrawColor( gRenderer, 255, 255, 0, 1 );
     for ( int row=1; row <= SCREEN_HEIGHT; ++row)
@@ -1455,7 +1649,7 @@ void background()
     }
 
     //Render current frame
-    gTextTexture.render( ( SCREEN_WIDTH - gTextTexture.getWidth() ) / 2, SCREEN_HEIGHT / 6-28 );
+    gTextTexture.render( ( SCREEN_WIDTH - gTextTexture.getWidth() ) / 2, SCREEN_HEIGHT / 6-70 );
     gTextTexture2.render( ( SCREEN_WIDTH - gTextTexture2.getWidth() ) / 2, SCREEN_HEIGHT -40 );
 }
 
@@ -1521,102 +1715,116 @@ void quit_button_back(int x,int y,SDL_Event e)
 
 void input(SDL_Event e,int x,int y)
 {
-    int ok=1;
-    SDL_Color textColor = { 0, 0, 0, 0xFF };
-
-    //The current input text.
-
-    gInputTextTexture.loadFromRenderedText( inputText.c_str(), textColor,gFont3 );
-
-    //Enable text input
-    SDL_StartTextInput();
-    while( ok )
+    int ok=1,k=0;
+    maxi_butonas_dynamic("Introdu un numar",x,y-40,x,y);
+    while(k==0)
     {
+        k=1;
+        SDL_Color textColor = { 0, 0, 0, 0xFF };
 
-        //The rerender text flag
-        bool renderText = false;
+        //The current input text.
 
-        //Handle events on queue
-        while( SDL_PollEvent( &e ) != 0 )
+        gInputTextTexture.loadFromRenderedText( inputText.c_str(), textColor,gFont3 );
+
+        //Enable text input
+        SDL_StartTextInput();
+        while( ok )
         {
-            //User requests quit
-            if( e.type == SDL_QUIT )
-            {
-                quit = true;
-            }
-            //Special key input
-            else if( e.type == SDL_KEYDOWN )
-            {
-                //Handle backspace
-                if( e.key.keysym.sym == SDLK_BACKSPACE && inputText.length() > 0 )
-                {
-                    //lop off character
-                    inputText.pop_back();
-                    renderText = true;
 
-                }
-                //Handle copy
-                else if( e.key.keysym.sym == SDLK_c && SDL_GetModState() & KMOD_CTRL )
-                {
-                    SDL_SetClipboardText( inputText.c_str() );
-                }
-                //Handle paste
-                else if( e.key.keysym.sym == SDLK_v && SDL_GetModState() & KMOD_CTRL )
-                {
-                    inputText = SDL_GetClipboardText();
-                    renderText = true;
-                }
-            }
-            //Special text input event
-            else if( e.type == SDL_TEXTINPUT&&inputText.length()<16 )
+            //The rerender text flag
+            bool renderText = false;
+
+            //Handle events on queue
+            while( SDL_PollEvent( &e ) != 0 )
             {
-                //Not copy or pasting
-                if( !( ( e.text.text[ 0 ] == 'c' || e.text.text[ 0 ] == 'C' ) && ( e.text.text[ 0 ] == 'v' || e.text.text[ 0 ] == 'V' ) && SDL_GetModState() & KMOD_CTRL ) )
+                //User requests quit
+                if( e.type == SDL_QUIT )
                 {
-                    //Append character
-                    inputText += e.text.text;
-                    renderText = true;
+                    quit = true;
+                }
+                //Special key input
+                else if( e.type == SDL_KEYDOWN )
+                {
+                    //Handle backspace
+                    if( e.key.keysym.sym == SDLK_BACKSPACE && inputText.length() > 0 )
+                    {
+                        //lop off character
+                        inputText.pop_back();
+                        renderText = true;
+
+                    }
+                    //Handle copy
+                    else if( e.key.keysym.sym == SDLK_c && SDL_GetModState() & KMOD_CTRL )
+                    {
+                        SDL_SetClipboardText( inputText.c_str() );
+                    }
+                    //Handle paste
+                    else if( e.key.keysym.sym == SDLK_v && SDL_GetModState() & KMOD_CTRL )
+                    {
+                        inputText = SDL_GetClipboardText();
+                        renderText = true;
+                    }
+                }
+                //Special text input event
+                else if( e.type == SDL_TEXTINPUT&&inputText.length()<16 )
+                {
+                    //Not copy or pasting
+                    if( !( ( e.text.text[ 0 ] == 'c' || e.text.text[ 0 ] == 'C' ) && ( e.text.text[ 0 ] == 'v' || e.text.text[ 0 ] == 'V' ) && SDL_GetModState() & KMOD_CTRL ) )
+                    {
+                        //Append character
+                        inputText += e.text.text;
+                        renderText = true;
+                    }
+                }
+
+            }
+
+            //Rerender text if needed
+            if( renderText )
+            {
+                //Text is not empty
+                if( inputText != "" )
+                {
+                    //Render new text
+                    gInputTextTexture.loadFromRenderedText( inputText.c_str(), textColor,gFont3 );
+                }
+                //Text is empty
+                else
+                {
+                    //Render space texture
+                    gInputTextTexture.loadFromRenderedText( " ", textColor,gFont3 );
                 }
             }
 
+
+            strcpy(textinput,inputText.c_str());
+
+            SDL_RenderPresent( gRenderer );
+
+            color_background("",x,y);
+
+            maxi_butonas_dynamic(textinput,x,y,x,y);
+            background();
+            SDL_RenderPresent( gRenderer );
+            //Update screen
+
+
+
+
+            if( e.key.keysym.sym == SDLK_ESCAPE||e.key.keysym.sym ==SDLK_RETURN )
+                break;
         }
 
-        //Rerender text if needed
-        if( renderText )
+        //Disable text input
+        SDL_StopTextInput();
+        for(int i=0; i<strlen(textinput); i++)
         {
-            //Text is not empty
-            if( inputText != "" )
+            if((textinput[i]<'0' || textinput[i]>'9')&&(textinput[i]!='.'))
             {
-                //Render new text
-                gInputTextTexture.loadFromRenderedText( inputText.c_str(), textColor,gFont3 );
-            }
-            //Text is empty
-            else
-            {
-                //Render space texture
-                gInputTextTexture.loadFromRenderedText( " ", textColor,gFont3 );
+                k=0;
+                break;
             }
         }
-
-
-        strcpy(textinput,inputText.c_str());
-
-        SDL_RenderPresent( gRenderer );
-
-        color_background("",x,y);
-
-        maxi_butonas_dynamic(textinput,x,y,x,y);
-        background();
-        SDL_RenderPresent( gRenderer );
-        //Update screen
-
-
-
-
-        if( e.key.keysym.sym == SDLK_ESCAPE||e.key.keysym.sym ==SDLK_RETURN )
-            break;
     }
 
-    //Disable text input
-    SDL_StopTextInput();
 }

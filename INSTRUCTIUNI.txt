@@ -1,0 +1,12 @@
+Se foloseste SDL 2.0
+
+Se deschide Convertor.exe
+
+in meniuri:
+tasta 1:porneste o melodie(apasat a doua oara pune pauza)
+tasta 2:porneste alta melodie(apasat a doua oara pune pauza)
+tasta 3:reseteaza melodiile
+tasta 4:inchide consola
+tasta 5:arata consola
+
+Distractie placuta!!!
