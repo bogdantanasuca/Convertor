@@ -687,7 +687,7 @@ void submeniu8(int x,int y,SDL_Event e)
         submenu1_ok2=0;
     if(!submenu1_ok2)
     {
-        for(j=1; j<=8; j++)
+        for(j=1; j<=7; j++)
         {
             mini_butonas(energie[j-1],SCREEN_WIDTH-145,213+j*17,x,y);
             if(is_mini_butonas_clicked(SCREEN_WIDTH-145,213+j*17,x,y,e))
